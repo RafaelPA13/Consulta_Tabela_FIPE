@@ -1,15 +1,10 @@
 package com.consulta.tabela.fipe.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.util.List;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-public record Dados(Integer codigo, String nome, List<Dados> modelos) {
+public record Dados(String codigo, String nome) {
     @Override
     public String toString() {
         return """
-                Código: %d
+                Código: %s
                 Nome: %s
                 """.formatted(codigo, nome);
     }
