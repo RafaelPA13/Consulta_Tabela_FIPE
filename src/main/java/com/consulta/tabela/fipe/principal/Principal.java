@@ -24,5 +24,14 @@ public class Principal {
         var dadosMarcas = conversor.converterLista(json, Dados.class);
         dadosMarcas.sort(Comparator.comparing(Dados::codigo));
         dadosMarcas.forEach(System.out::println);
+
+        System.out.println("Digite o código da marca de " + veiculo + "que você deseja pesquisar: ");
+        Integer marca = input.nextInt();
+        input.nextLine();
+        json = consulta.consultarAPI(URL + removerAcento.removedor(veiculo) + "/marcas/" + marca + "/modelos");
+
+        var dadosModelos = conversor.converterDados(json, Dados.class);
+        dadosModelos.modelos().forEach(m-> System.out.println(m.nome().toUpperCase() + "\n"));
+
     }
 }
