@@ -21,13 +21,13 @@ public class Principal {
     private final String URL = "https://parallelum.com.br/fipe/api/v1/";
 
     public void menu() {
-        System.out.println("Digite qual veículo você gostaria de pesquisar [carros | motos | caminhões]: ");
+        System.out.println("Digite uma das opções [carros | motos | caminhões]: ");
         String veiculo = input.nextLine();
         var json = consulta.consultarAPI(URL + removerAcento.removedor(veiculo) + "/marcas");
 
         var dadosMarcas = conversor.converterLista(json, Dados.class);
         System.out.println("*** Marcas ***\n");
-        dadosMarcas.stream().sorted(Comparator.comparing(Dados::codigo)).forEach(System.out::println);
+        dadosMarcas.stream().sorted(Comparator.comparing(Dados::nome)).forEach(System.out::println);
 
         System.out.println("Digite o código da marca de " + veiculo + " que você deseja pesquisar: ");
         Integer marca = input.nextInt();
@@ -56,7 +56,7 @@ public class Principal {
         System.out.println("*** Anos *** \n");
         dadosAnos.stream().sorted(Comparator.comparing(Dados::codigo)).forEach(System.out::println);
 
-        System.out.println("Digite o ano do modelo que você busca: ");
+        System.out.println("Digite o código do ano do modelo que você busca: ");
         String ano = input.nextLine();
         json = consulta.consultarAPI(URL + removerAcento.removedor(veiculo) + "/marcas/" + marca + "/modelos/" + codigo + "/anos/" + ano);
 
